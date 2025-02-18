@@ -4,15 +4,20 @@ from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
+import random
+
+
+class ScatterTextWidget(BoxLayout):
+    def change_label_color(self, *args):
+        colour = [random.random() for i in range(3)] + [1]
+        label = self.ids["my_label"]
+        label.color = colour
+
+
 class TutorialApp(App):
     def build(self):
-        b = BoxLayout(orientation='vertical') 
-        t = TextInput(text='Hello',
-        font_size=150)
-        l = Label(font_size=150)
-        b.add_widget(t)
-        b.add_widget(l)
-        t.bind(text=l.setter('text'))
-        return b
+        return ScatterTextWidget()
+
+
 if __name__ == "__main__":
     TutorialApp().run()
